@@ -1,0 +1,21 @@
+
+<h1>{{ student }}</h1>
+<a href="{% url 'student_detail' student.id %}">Back to Student Detail</a>
+
+<h2>Add Note</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+
+<h2>Notes</h2>
+<ul>
+    {% for note in notes %}
+    <li>{{ note.note }} - {{ note.created_at }} [<a href="{% url 'edit_note' note.id %}">Edit</a>]</li>
+    {% empty %}
+    <li>No notes found.</li>
+    {% endfor %}
+</ul>
+
+
